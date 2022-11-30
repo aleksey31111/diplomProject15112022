@@ -40,6 +40,22 @@
 
     </head>
 	<body>
+	{% load i18n %}
+
+<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}" />
+    <select name="language">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                {{ language.name_local }} ({{ language.code }})
+            </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="{% trans 'Перевести' %}" />
+</form>
 		<!-- HEADER -->
 		<header>
 			<!-- TOP HEADER -->
@@ -48,7 +64,7 @@
 					<ul class="header-links pull-left">
 						<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
 						<li><a href="https://www.google.com/intl/ru/gmail/about/"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-						<li><a href="https://www.google.com/maps/place/%D0%9D%D0%B8%D0%B6%D0%BD%D0%B5%D0%BA%D0%B0%D0%BC%D1%81%D0%BA,+%D0%A0%D0%B5%D1%81%D0%BF.+%D0%A2%D0%B0%D1%82%D0%B0%D1%80%D1%81%D1%82%D0%B0%D0%BD/@55.6146605,51.8925854,12z/data=!3m1!4b1!4m5!3m4!1s0x415fecad116124e1:0x62ec0a5ee724e1cc!8m2!3d55.613196!4d51.8469974"><i class="fa fa-map-marker"></i> Нижнекамск</a></li>
+						<li><a href="https://www.google.com/maps/place/%D0%9D%D0%B8%D0%B6%D0%BD%D0%B5%D0%BA%D0%B0%D0%BC%D1%81%D0%BA,+%D0%A0%D0%B5%D1%81%D0%BF.+%D0%A2%D0%B0%D1%82%D0%B0%D1%80%D1%81%D1%82%D0%B0%D0%BD/@55.6146605,51.8925854,12z/data=!3m1!4b1!4m5!3m4!1s0x415fecad116124e1:0x62ec0a5ee724e1cc!8m2!3d55.613196!4d51.8469974"><i class="fa fa-map-marker"></i> {% trans 'Нижнекамск' %}</a></li>
 					</ul>
 					<ul class="header-links pull-right">
 						{% if user.is_authenticated %}
@@ -59,10 +75,10 @@
                     		</a>
                 		</li>
 						<li class="nav-item">
-                    		<a class="nav-link" href="{% url 'logout' %}">Выйти <i class="fas fa-sign-out-alt"></i></a>
+                    		<a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt">{% trans 'Выйти' %}</i></a>
                 		</li>
 						{% else %}
-						<li><a href="{% url 'login' %}"><i class="fa fa-user-o"></i>Войти</a></li>
+						<li><a href="{% url 'login' %}"><i class="fa fa-user-o"></i>{% trans 'Войти' %}</a></li>
 						{% endif %}
 					</ul>
 				</div>
@@ -90,26 +106,26 @@
 							<div class="header-search">
 
 								<form action="#">
-									<p style="color:white">ПОИСК</p>
-									<input type="search" class="search" name="search"
-										   style="width:70%">
+									<p style="color:white"></p>
+
 								</form>
 
 							</div>
 						</div>
+
 						<!-- /SEARCH BAR -->
 
 						<!-- ACCOUNT -->
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
-
+								{% if user.is_authenticated %}
 								<!-- Contact -->
 								<div class="bblock">
 								<form action="{% url 'contact' %}" method="post">
 
 									<a href="{% url 'contact' %}">
 										<i class="fa fa-heart-o"></i>
-										<span style="color:white">Обратная связь</span>
+										<span style="color:white">{% trans 'Обратная связь' %}</span>
 										<div class="qty"></div>
 									</a>
 
@@ -121,7 +137,7 @@
 								<div class="dropdown bblock">
 									<a href="{% url 'profile' %}" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 
-										<span><a href="{% url 'profile' %}" >Просмотр Профайла</a></span>
+										<span><a href="{% url 'profile' %}" >{% trans 'Просмотр Профайла' %}</a></span>
 
 										<div class="qty" >{{ total.quantity }}</div>
 
@@ -134,14 +150,15 @@
 								<div class="dropdown bblock">
 									<a href="{% url 'profile' %}" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
-										<span><a href="{% url 'cart:cart_detail' %}" >Просмотр Корзины</a></span>
+										<span><a href="{% url 'cart:cart_detail' %}" >{% trans 'Просмотр Корзины' %}</a></span>
 
 										<div class="qty" >{{ total.quantity }}</div>
 
 									</a>
 								</div>
-								<!-- /Cart -->
 
+								<!-- /Cart -->
+								{% endif %}
 								<!-- 95 --><!-- Wishlist -->
 
 <!-- 103 --><!-- /Wishlist -->
@@ -168,10 +185,10 @@
 				<!-- responsive-nav -->
 				<div id="responsive-nav" style="display: flex; align-content: center;">
 					<!-- NAV -->
-					<h3>Категории</h3>
+					<h3>{% trans 'Категории' %}</h3>
        			<ul style="display: flex; align-content: center; margin-left: 20px;">
 					<li {% if not category %}class="selected"{% endif %}>
-						<a href="{% url 'products:product_list' %}" style="color:red; font-size:18px;">Товары всех категорий</a>
+						<a href="{% url 'products:product_list' %}" style="color:red; font-size:18px;">{% trans 'Товары всех категорий' %}</a>
 					</li>
 					{% for c in categories %}
 						<li {% if category.slug == c.slug %}class="selected"{% endif %}>
@@ -206,11 +223,11 @@
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
 								<h3 class="footer-title">О нас</h3>
-								<p>Дипломная работа WEB-программирование
-									на языке Python.</p>
+								<p>{% trans 'Дипломная работа WEB-программирование' %}
+									{% trans 'на языке Python.' %}</p>
 								<ul class="footer-links">
 									<li><a href="https://www.google.com/maps/place/%D0%9D%D0%B8%D0%B6%D0%BD%D0%B5%D0%BA%D0%B0%D0%BC%D1%81%D0%BA,+%D0%A0%D0%B5%D1%81%D0%BF.+%D0%A2%D0%B0%D1%82%D0%B0%D1%80%D1%81%D1%82%D0%B0%D0%BD/@55.6146605,51.8925854,12z/data=!3m1!4b1!4m5!3m4!1s0x415fecad116124e1:0x62ec0a5ee724e1cc!8m2!3d55.613196!4d51.8469974">
-										<i class="fa fa-map-marker"></i>Нижнекамск</a>
+										<i class="fa fa-map-marker"></i>{% trans 'город Нижнекамск' %}</a>
 									</li>
 									<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
 									<li><a href="https://www.google.com/intl/ru/gmail/about/">
@@ -222,7 +239,7 @@
 
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">Категории товара</h3>
+								<h3 class="footer-title">{% trans 'Категории товара' %}</h3>
 								<ul class="footer-links">
 
 									{% for c in categories %}
@@ -241,7 +258,7 @@
 
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">Обратная связь</h3>
+								<h3 class="footer-title">{% trans 'Обратная связь' %}</h3>
 								<ul class="footer-links">
 
 									<li>
@@ -249,7 +266,7 @@
 
 										<a href="{% url 'contact' %}">
 											<i class="fa fa-heart-o"></i>
-											<span style="color:white">Обратная связь</span>
+											<span style="color:white">{% trans 'Обратная связь' %}</span>
 											<div class="qty"></div>
 										</a>
 
@@ -262,23 +279,23 @@
 
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">Профиль <br> Корзина</h3>
+								<h3 class="footer-title">{% trans 'Профиль' %} <br> {% trans 'Корзина' %}</h3>
 								<ul class="footer-links">
 									{% if user.is_authenticated %}
                 					<li class="nav-item">
                     					<a class="nav-link" href="{% url 'profile' %}" >
-											Мой профиль
+											{% trans 'Мой профиль' %}
                         					<i class="fas fa-user-circle"></i>
                     					</a>
 										<br>
 										<a class="nav-link" href="{% url 'cart:cart_detail' %}" >
-											Корзина
+											{% trans 'Корзина' %}
                         					<i class="fas fa-user-circle"></i>
                     					</a>
                 					</li>
 									{% else %}
 									<li class="nav-item">
-										<a class="nav-link" href="{% url 'login' %}">Войти Зарегистрироваться <i class="fas fa-sign-in-alt"></i></a>
+										<a class="nav-link" href="{% url 'login' %}">{% trans 'Войти Зарегистрироваться' %} <i class="fas fa-sign-in-alt"></i></a>
 									</li>
                 					{% endif %}
 								</ul>
@@ -292,8 +309,6 @@
 			<!-- /top footer -->
 
 			<!-- bottom footer -->
-
-
 
 			<!-- /bottom footer -->
 		</footer>

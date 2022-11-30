@@ -8,6 +8,23 @@
 {% endblock %}
 {% block content %}
 
+{% load i18n %}
+
+<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}" />
+    <select name="language">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                {{ language.name_local }} ({{ language.code }})
+            </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="{% trans 'Перевести' %}" />
+</form>
+
 <div class="post">{% if product.image %}
     <div class="img">
         <img src="{{ product.image.url }}" class="image" alt="">
@@ -18,15 +35,15 @@
     </div>
     {% endif %}
     {% autoescape off %}
-    <h2>Категория: <a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
+    <h2>{% trans 'Категория:' %} <a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
 
-    <p>Название: <h4>{{ product.name|striptags|safe }}</h4></p>
-    <p>Описание: <h4>{{ product.description|striptags|safe }}</h4></p>
-    <p>Короткое описание: <h5>{{ product.short_description|striptags|safe }}</h5></p>
-    <p>Цена: <h3>{{ product.price|striptags|safe }} руб</h3></p>
-    <p>Количество: <h4>{{ product.stock|striptags|safe }} шт</h4></p>
-    <p>Время добавления товара: {{ product.created }}</p>
-    <p>Время обновления товара: {{ product.updated }}</p>
+    <p>{% trans 'Название:' %} <h4>{{ product.name|striptags|safe }}</h4></p>
+    <p>{% trans 'Описание:' %} <h4>{{ product.description|striptags|safe }}</h4></p>
+    <p>{% trans 'Короткое описание:' %} <h5>{{ product.short_description|striptags|safe }}</h5></p>
+    <p>{% trans 'Цена:' %} <h3>{{ product.price|striptags|safe }} {% trans 'руб' %}</h3></p>
+    <p>{% trans 'Количество:' %} <h4>{{ product.stock }} {% trans 'шт' %}</h4></p>
+    <p>{% trans 'Время добавления товара:' %} {{ product.created }}</p>
+    <p>{% trans 'Время обновления товара:' %} {{ product.updated }}</p>
 
     </div>
     {% endautoescape %}
@@ -35,7 +52,7 @@
 
         {% csrf_token %}
         {{ cart_product_form }}
-        <button type="submit" style="color:#dc3545; font-size:20px;">Добавить в корзину</button>
+        <button type="submit" style="color:#dc3545; font-size:20px;">{% trans 'Добавить в корзину' %}</button>
     </form>
 
 

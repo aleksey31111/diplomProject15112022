@@ -5,9 +5,6 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 
-from django.conf import settings
-from django.core.mail import send_mail
-
 # from products.models import Basket
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from .forms import ContactForm

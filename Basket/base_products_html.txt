@@ -72,3 +72,17 @@
 				<!-- /responsive-nav -->
 			</div>
 <!-- 176 --><!-- /container -->
+
+<!-- 15-11-2022 --> <!-- 88 --><!-- SEARCH BAR -->
+						<div class="col-md-6">
+							<div class="header-search">
+
+								<form action="{% url 'products:product_list">
+									<p style="color:white">ПОИСК</p>
+									<input type="search" class="search" name="search"
+										   style="width:70%">
+								</form>
+
+							</div>
+						</div>
+<!-- 100 -->			<!-- /SEARCH BAR -->

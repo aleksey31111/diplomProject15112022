@@ -57,3 +57,12 @@
             </div>
 
 <!-- 30 --></div>
+
+<!-- 15-11-2022 --><!-- 34 --><!-- SEARCH BAR -->
+            <div>
+                <h3 style="margin: 50px">Поиск</h3>
+                <form action="{% url 'products:product_list' %}">
+                    <input type="search" class="search" name="search">
+                </form>
+            </div>
+<!-- 41 --> <!-- /SEARCH BAR -->

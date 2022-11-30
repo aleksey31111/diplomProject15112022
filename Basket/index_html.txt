@@ -259,3 +259,70 @@
 			<!-- /container -->
 		</div>
 <!-- 32 --><!-- /SECTION -->
+
+<!-- 105 --><!-- 28-11-2022 --><!-- products -->
+										{% for product in products %}
+										<div class="product">
+											<div class="product-img">
+												<img src="{% if product.image %} {{ product.image.url }}
+												{% else %} {% static 'img/default_shop.jpg' %} {% endif %}" alt="">
+												<div class="product-label">
+													<span class="sale"></span>
+													<span class="new">NEW</span>
+												</div>
+											</div>
+											<div class="product-body">
+												<p class="product-category">{{ product.category }}</p>
+												<h3 class="product-name"><a href="{{ product.get_absolute_url }}">{{ product.name|safe|truncatewords:30 }}</a></h3>
+												<h4 class="product-price">{{ product.price }} руб</h4>
+												<div class="product-rating">
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+												</div>
+												<div class="product-btns">
+													<a href="{{ product.get_absolute_url }}">
+													<i class="fa fa-eye"></i><span class="tooltipp">{% trans 'Просмотр товара' %}</span>
+													</a>
+												</div>
+											</div>
+											<div class="add-to-cart">
+												<a href="{{ product.get_absolute_url }}">
+													<input type="submit" class="add-to-cart-btn" value="Перейти">
+														<i class="fa fa-shopping-cart"></i>
+
+												</a>
+											</div>
+										</div>
+										{% endfor %}
+<!-- 142 --><!-- /products -->
+
+<!-- 235 --><!-- product widget -->
+								{% for product in products %}
+								{% if product.category.id == 4 %}
+								<div class="product-widget">
+									<div class="product-img">
+										<img src="{% if product.image %}
+										{{ product.image.url }}
+										{% else %} {% static 'img/default_shop.jpg' %} {% endif %} "
+											 alt="">
+									</div>
+									<div class="product-body">
+										<p class="product-category">{{ product.category }}</p>
+										<h3 class="product-name">{{ product.name|safe|truncatewords:30 }}</h3>
+										<h4 class="product-price">{{ product.price }} руб</h4>
+									</div>
+								</div>
+
+								<div class="add-to-cart">
+												<a href="{{ product.get_absolute_url }}">
+													<input type="submit" class="add-to-cart-btn" value="Перейти к Товару для Покупки">
+														<i class="fa fa-shopping-cart"></i>
+
+												</a>
+											</div>
+								{% endif %}
+								{% endfor %}
+<!-- 261 --><!-- /product widget -->
