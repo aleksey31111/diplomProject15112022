@@ -2,7 +2,6 @@ from django.contrib import admin
 from .models import Category, Product
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
-
 from modeltranslation.admin import TranslationAdmin
 
 
@@ -34,10 +33,8 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter = ('name',)
 
 
-# @admin.register(Product)
-# class ProductAdmin(TranslationAdmin):
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'slug', 'price', 'stock', 'available', 'created', 'updated']
+class ProductAdmin(TranslationAdmin):
+    list_display = ['id', 'name', 'category','slug', 'price', 'stock', 'available', 'created', 'updated']
     list_filter = ['available', 'created', 'updated']
     list_editable = ['available']
     list_display_links = ('id', 'name')

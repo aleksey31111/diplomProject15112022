@@ -13,19 +13,23 @@
 
 {% load i18n %}
 
+
+
+
+
 <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
-    <input name="next" type="hidden" value="{{ redirect_to }}" />
+    <input name="next" type="hidden" value="{{ redirect_to }}">
     <select name="language">
         {% get_current_language as LANGUAGE_CODE %}
         {% get_available_languages as LANGUAGES %}
         {% get_language_info_list for LANGUAGES as languages %}
         {% for language in languages %}
-            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
                 {{ language.name_local }} ({{ language.code }})
             </option>
         {% endfor %}
     </select>
-    <input type="submit" value="{% trans 'Перевести' %}" />
+    <input type="submit" value="Превести">
 </form>
 
 <div id="header">
@@ -39,10 +43,10 @@
             {% trans 'В вашей корзине:' %}
             <a href="{% url 'cart:cart_detail' %}" style="font-size:25; color:red;">
                 {{ total_items }} {% trans 'Устройства На Сумму' %}
-                {{ cart.get_total_price }} руб.
+                {{ cart.get_total_price }} {% trans 'руб.' %}
             </a>
         {% else %}
-        {% trans 'Ваша Карта Пуста' %}
+        {% trans 'Ваша Корзина Пуста' %}
         {% endif %}
     {% endwith %}
 </div>

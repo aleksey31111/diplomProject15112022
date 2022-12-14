@@ -7,20 +7,8 @@
 
 {% load i18n %}
 
-<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
-    <input name="next" type="hidden" value="{{ redirect_to }}" />
-    <select name="language">
-        {% get_current_language as LANGUAGE_CODE %}
-        {% get_available_languages as LANGUAGES %}
-        {% get_language_info_list for LANGUAGES as languages %}
-        {% for language in languages %}
-            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
-                {{ language.name_local }} ({{ language.code }})
-            </option>
-        {% endfor %}
-    </select>
-    <input type="submit" value="{% trans 'Перевести' %}" />
-</form>
+
+
 
 <!-- Page Content -->
 <div class="container">
@@ -29,12 +17,12 @@
 
         <div class="col-lg-3">
 
-            <h1 class="my-4">Магазин Устройств</h1>
+            <h1 class="my-4">{% trans 'Магазин Устройств' %}</h1>
             <div class="list-group">
                  <h3>{% trans 'Категории' %}</h3>
         <ul>
             <li {% if not category %}class="selected"{% endif %}>
-                <a href="{% url 'products:product_list' %}">{% trans 'Все категории' %}</a>
+                <a href="{% url 'products:product_list' %}">{% trans "Все категории" %}</a>
             </li>
             {% for c in categories %}
                 <li {% if category.slug == c.slug %} class="selected" {% endif %}>
@@ -50,7 +38,7 @@
         <div class="col-lg-9">
 
             <div>
-                <h3 style="margin: 50px">Поиск</h3>
+                <h3 style="margin: 50px">{% trans 'Поиск' %}</h3>
                 <form action="{% url 'products:product_list' %}">
                     <input type="search" class="search" name="search">
                 </form>
@@ -128,7 +116,7 @@
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Store 2021</p>
+        <p class="m-0 text-center text-white">{% trans 'Авторское Право &copy; Store 2021' %}</p>
     </div>
     <!-- /.container -->
 </footer>

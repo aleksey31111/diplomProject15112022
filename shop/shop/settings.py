@@ -16,6 +16,7 @@ from django.utils.translation import gettext_lazy as _
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -26,6 +27,7 @@ SECRET_KEY = 'django-insecure-nyu10@l*wyv8dg)l^hv)2dtl91&^5$-*hfjkm#ma#yes)@996e
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
 
 # Application definition
 
@@ -58,12 +60,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# MIDDLEWARE_CLASSES = (
-#     'django.contrib.sessions.middleware.SessionMiddleware',
-#     'django.middleware.locale.LocaleMiddleware',
-#     'django.middleware.common.CommonMiddleware',
-# )
-
 ROOT_URLCONF = 'shop.urls'
 
 TEMPLATES = [
@@ -85,6 +81,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'shop.wsgi.application'
 
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -94,6 +91,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -113,6 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -121,37 +120,22 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
 LANGUAGES = (
     # Russian
-    ('ru', _('Russian')),
+    ('ru', _('Russia')),
     # English
     ('en', _('English')),
     # Spanish
-    # ('es', _('Spanish')),
+    ('es', _('Spain')),
     # Simplified Chinese
-    # ('zh-hans', _('Chinese')),
+    ('zh-hans', _('China')),
     # Japanese
-    # ('ja', _(u'日本語')),
+    ('ja', _(u'日本語')),
 )
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
 
 MODELTRANSLATION_PREPOPULATE_LANGUAGE = 'en'
-
-# LANGUAGES = (
-##     Russian
-# ('ru', _('Russian')),
-##   English
-# ('en', _('English')),
-#    # Spanish
-#     ('es', _('Spanish')),
-#    # Traditional Chinese
-#     ('zh', _(u'繁體中文')),
-#    # Japanese
-#     ('ja', _(u'日本語')),
-# )
-
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale/'),
@@ -183,11 +167,11 @@ CART_SESSION_ID = 'cart'
 # Email
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.mail.ru'  # Сервер для отправки сообщений
-EMAIL_PORT = 2525  # порт для подключения
+EMAIL_HOST = 'smtp.mail.ru'          # Сервер для отправки сообщений
+EMAIL_PORT = 2525                        # порт для подключения
 EMAIL_HOST_USER = 'bashkirov1985@internet.ru'  # Aleksey Bashkirov     # имя пользователя
 EMAIL_HOST_PASSWORD = 'i3ufQvqLngbhWxSxVi14'  # '0AHEcV0EmXrhVkWAf05D'  #'rf%Fk1Tiq'      # пароль от ящика
-EMAIL_USE_TLS = True  # использование протокола шифрования
+EMAIL_USE_TLS = True                     # использование протокола шифрования
 EMAIL_USE_SSL = False
 
 #### DEFAULT_FROM_EMAIL = 'bashkirov1985@internet.ru'  # email, с которого будет отправлено письмо
@@ -242,7 +226,7 @@ CKEDITOR_CONFIGS = {
         # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
         'tabSpaces': 4,
         'extraPlugins': ','.join([
-            'uploadimage',  # the upload image feature
+            'uploadimage', # the upload image feature
             # your extra plugins here
             'div',
             'autolink',

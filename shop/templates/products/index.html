@@ -9,22 +9,24 @@
 {% endblock %}
 
 {% block content %}
+
 {% load i18n %}
 
 <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
-    <input name="next" type="hidden" value="{{ redirect_to }}" />
+    <input name="next" type="hidden" value="{{ redirect_to }}">
     <select name="language">
         {% get_current_language as LANGUAGE_CODE %}
         {% get_available_languages as LANGUAGES %}
         {% get_language_info_list for LANGUAGES as languages %}
         {% for language in languages %}
-            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
                 {{ language.name_local }} ({{ language.code }})
             </option>
         {% endfor %}
     </select>
-    <input type="submit" value="{% trans 'Перевести' %}" />
+    <input type="submit" value="{% trans 'Перевести' %}">
 </form>
+
 		<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
@@ -110,7 +112,7 @@
 												{% else %} {% static 'img/default_shop.jpg' %} {% endif %}" alt="">
 												<div class="product-label">
 													<span class="sale"></span>
-													<span class="new">NEW</span>
+													<span class="new">{% trans 'НОВЫЙ' %}</span>
 												</div>
 											</div>
 											<div class="product-body">
@@ -150,6 +152,11 @@
 					</div>
 					<!-- Products tab & slick -->
 
+
+
+
+
+					
 					<!-- Products tab & slick -->
 				</div>
 				<!-- /row -->
@@ -169,25 +176,25 @@
 								<li>
 									<div>
 										<h3>02</h3>
-										<span>{% trans 'Дня' %}</span>
+										<span>{% trans 'Дней' %}</span>
 									</div>
 								</li>
 								<li>
 									<div>
 										<h3>10</h3>
-										<span>{% trans 'Часов' %}</span>
+										<span>{% trans 'Часы' %}</span>
 									</div>
 								</li>
 								<li>
 									<div>
 										<h3>34</h3>
-										<span>{% trans 'Минут' %}</span>
+										<span>{% trans 'Минуты' %}}</span>
 									</div>
 								</li>
 								<li>
 									<div>
 										<h3>60</h3>
-										<span>{% trans 'Секунд' %}</span>
+										<span>Secs</span>
 									</div>
 								</li>
 							</ul>
@@ -202,6 +209,7 @@
 			<!-- /container -->
 		</div>
 		<!-- /HOT DEAL SECTION -->
+
 		<!-- /SECTION -->
 <!-- 442 -->
 		<!-- SECTION -->
@@ -242,6 +250,7 @@
 										<h4 class="product-price">{{ product.price }} руб</h4>
 									</div>
 								</div>
+
 								<div class="add-to-cart">
 												<a href="{{ product.get_absolute_url }}">
 													<input type="submit" class="add-to-cart-btn" value="{% trans 'Перейти к Товару для Покупки' %}">
@@ -253,9 +262,15 @@
 								{% endfor %}
 								<!-- /product widget -->
 							</div>
+
 						</div>
 					</div>
+
 					<div class="clearfix visible-sm visible-xs"></div>
+
+
+
+
 				</div>
 				<!-- /row -->
 			</div>

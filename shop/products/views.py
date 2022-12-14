@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Product
 from django.core.paginator import Paginator
-from cart import CartAddProductForm
+from cart.forms import CartAddProductForm
 
 
 def index(request, category_slug=None):
@@ -47,8 +47,7 @@ def products(request, category_id=None):
     page_obj = paginator.get_page(page_number)
 
     context.update({'products': page_obj})
-    # return render(request, 'products/products.html', context)
-    return render(request, 'shop/product/list.html')
+    return render(request, 'products/products.html', context)
 
 
 def product_list(request, category_slug=None):
