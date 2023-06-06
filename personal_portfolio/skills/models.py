@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Skills(models.Model):
@@ -6,6 +7,7 @@ class Skills(models.Model):
     description = models.CharField(max_length=250)
     image = models.ImageField(upload_to='skills/images/')
     url = models.URLField(blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title

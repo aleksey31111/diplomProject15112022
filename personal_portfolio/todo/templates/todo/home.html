@@ -1,0 +1,17 @@
+{% extends 'todo/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="center">
+    <h1>Модуль Todo для Регистрации, Выполнения, Удаления Пользователей</h1>
+    <h2>Этот Модуль Предназначен для обеспечения Регистрации
+        Пользователей в Todo. <br>
+        Skills, Blogs, Crafts - Могут видеть все пользователи </h2>
+    <p>Помогает находить слабые стороны
+        в работе сотрудника и Улучшить Их</p>
+
+    <form action="{% url 'loginuser' %}" class="center">
+        <button class="btn">Начать</button>
+    </form>
+</div>
+{% endblock content %}

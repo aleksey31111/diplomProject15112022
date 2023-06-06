@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+body{
+    font-family: 'Roboto', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+.wrap{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 30px;
+    box-sizing: border-box;
+}
+.menu{
+    background: #003366;
+    box-shadow: 0 2px 12px 2px #003366;
+}
+ul{
+    list-style: none;
+    padding: 0;
+}
+.menu ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+}
+.menu a{
+    color: #FFF;
+}
+a{
+    text-decoration: none;
+}
+.menu .logo{
+    margin-right: 30%;
+    color: #FFF;
+}
+
+.menu1{
+    background: lightgoldenrodyellow;
+    padding: 10px;
+    border-bottom: 6px solid #FFF;
+    text-indent: 25px;
+}
+.menu1 .wrap1{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* margin-top: 0; */
+    align-items: center;
+}
+
+.menu1 a{
+    color: #663366;
+    font-weight: bold;
+    text-decoration: none;
+
+}
+.menu1 ul{
+    display: flex;
+    list-style: none;
+    font-size: 20px;
+
+}
+.menu1 list{
+    margin-left: 40px;
+}
+
+.menu1 li{
+    /* padding-top: 0; */
+    margin-left:53%;
+}
+.menu1 .logo{
+    margin-right: 30%;
+    color: #FFF;
+}
+
+.content .wrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+h1, h2{
+    color: #003366;
+}
+.btn{
+    background: #003366;
+    color: #FFF;
+}
+button{
+    border-radius: 6px;
+    box-shadow: inset 0 0 6px 2px #FFF;
+    padding: 10px 40px;
+    margin-top: 40px;
+    font-size: 24px;
+    cursor: pointer;
+}
+.center{
+    text-align: center;
+}
+.input{
+    width: 100%;
+    padding: 6px 10px;
+    box-sizing: border-box;
+    margin-top: 4px;
+}
+.bg{
+    box-shadow: 0 2px 12px 2px #003366;
+    padding: 40px;
+    box-sizing: border-box;
+    border-radius: 6px;
+}
+.top{
+    padding: 4px 24px;
+    margin-top: 0;
+    background: transparent;
+    border: 5px;
+}
+.content li{
+    box-shadow: 0 2px 8px 2px #003366;
+    margin-bottom: 20px;
+    font-size: 20px;   
+}
+.content a{
+    color: #000;
+    display: block;
+    padding: 20px;
+}
+.but{
+    display: flex;
+    align-items: flex-end;
+}
+.good{
+    background: teal;
+}
+.remove{
+    background: orangered;
+}
+a b{
+    color: orangered;
+}
+.register ul{
+    margin-top: -16px;
+}
+.register li{
+    box-shadow: none;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+.helptext{
+    font-size: 14px;
+}
+.register label{
+    color: teal;
+    font-size: 18px;
+    font-weight: bold;
+}
+.register button{
+    margin-top: 10px;
+}

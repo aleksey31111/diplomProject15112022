@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+</head>
+<body>
+    <div class="menu">
+        <div class="wrap">
+            <div class="logo">
+                <a href="{% url 'skills_index' %}"><img src="{% static 'skills/logo.png' %}" alt=""></a>
+                <a href="{% url 'crafts_index' %}"><img src="{% static 'skills/self_make2.jpg' %}" style="width:50px; height:50px;" alt=""></a>
+            </div>
+        </div>
+    </div>
+{% if user.is_authenticated %}
+
+<div class="menu">
+    <div class="wrap">
+        
+        <ul>
+            <li class="logo">Пользователь: {{ user.username }}</li>
+            <li><a href="{% url 'todo:createtodo' %}">Создать</a></li>
+            <li><a href="{% url 'todo:currenttodos' %}">Актуальные</a></li>
+            <li><a href="{% url 'todo:completedtodo' %}">Выполненные</a></li>
+            <li>
+                <form action="{% url 'todo:logoutuser' %}" method="post">
+                    {% csrf_token %}
+                    <button class="top">Выйти</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</div>
+{% else %}
+<div class="menu">
+    <div class="wrap">
+        <ul>
+            <li class="logo"><a href="{% url 'todo:home' %}">Модуль Todo</a></li>
+            <li><a href="{% url 'todo:signupuser' %}">Зарегистрироваться</a></li>
+            <li><a href="{% url 'todo:loginuser' %}">Войти</a></li>
+        </ul>
+    </div>
+</div>
+{% endif %}
+<div class="content">
+    <div class="wrap">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>

@@ -19,12 +19,25 @@ from django.conf.urls.static import static
 from django.conf import settings
 from skills import views as skills_views
 from crafts import views as crafts_views
+from todo import views as todo_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', skills_views.index, name='skills_index'),
     path('blog/', include('blog.urls')),
     path('crafts/', crafts_views.index, name='crafts_index'),
+    path('crafts/create/', crafts_views.create, name='create_craft'),
+    # Auth
+    path('signup/', todo_views.signupuser, name='signupuser'),
+    path('logout/', todo_views.logoutuser, name='logoutuser'),
+    path('login/', todo_views.loginuser, name='loginuser'),
+    # Todos
+
+    # path('home/', todo_views.home, name='home'),
+    # path('create', todo_views.createtodo, name='createtodo'),
+    # path('current/', todo_views.currenttodos, name='currenttodos'),
+    # Авторизация, Аутентификация, Задачи Приложения todo
+    path('todo/', include('todo.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
